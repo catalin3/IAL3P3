@@ -5,20 +5,21 @@ class LSE:
         self.__tomographList = tomographList
         w = len(tomographList)
         h = 385
-        self.__x = [[0 for x in range(w)] for y in range(h)]
+        self.__x = [[0 for x in range(h)] for y in range(w)]
         self.__y = [0 for x in range(w)]
 
         for i in range(w):
-            boneStructures = tomographList[i].getBonesStructres()
+            boneStructures = tomographList[i].getBoneStructures()
             airInclusions = tomographList[i].getAirInclusions()
-            x[i][0] = 1.0
+            self.__x[i][0] = 1.0
+            #print(self.__x[i][0])
 
             for contor in range(len(boneStructures)):
-                x[i][contor+1] = boneStructures[contor]
+                self.__x[i][contor+1] = boneStructures[contor]
 
             for contor in range(len(airInclusions)):
-                x[i][contor+241] = airInclusions[contor]
-                y[i] = tomographList[i].getRelativeLocation()
+                self.__x[i][contor+241] = airInclusions[contor]
+                self.__y[i] = tomographList[i].getRelativeLocations()
 
 
     def compute(self):

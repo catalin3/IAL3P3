@@ -6,7 +6,7 @@ def main():
     tm = Tomograph(1, 1, 1, 1)
     path = "slice_localization_data.csv"
     #read_from_csv(path)
-    leastSquare(path)
+    #leastSquare(path)
 
 if __name__ == '__main__':
     main()
