@@ -1,6 +1,7 @@
 import csv
 from ial3p3.tomograph import Tomograph
 from ial3p3.LSE import LSE
+from ial3p3.evolutiveAlgorithm import EvolutiveAlgorithm, Chromosome
 
 
 def read_from_csv(path):
@@ -37,3 +38,21 @@ def leastSquare(path):
 
     for t in tomographList:
         print(t.getId()," ",t.getAI_relativeLocation())
+
+
+def evolutiveAlgorithm(path):
+    tomographList = read_from_csv(path)
+    evolutiveAlgorithm = EvolutiveAlgorithm(100,10,tomographList)
+
+    coefficients = evolutiveAlgorithm.solve()
+    for i in range(len(tomographList)):
+        current = tomographList[i]
+        currentValue = coefficients[0]
+        bonesStructures = current.getBoneStructures()
+        airInclusions = current.getAirInclusions()
+        for contor in range(len(bonesStructures)):
+            currentValue = currentValue + coefficients[contor+1] * bonesStructures[contor]
+
+        for contor in range(len(airInclusions)):
+            currentValue = currentValue + coefficients[contor+241] * airInclusions[contor]
+        current.setAI_relativeLocation(currentValue)
