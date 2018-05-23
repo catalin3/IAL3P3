@@ -10,7 +10,7 @@ class EvolutiveAlgorithm:
         self.__curentPopulation = [0 for i in range(populationSize)]
 
         for i in range(populationSize):
-            self.__curentPopulation[i] = Chromosome(None, None)
+            self.__curentPopulation[i] = Chromosome(None, self.__data)
 
     def getData(self):
         return self.__data
@@ -40,7 +40,7 @@ class EvolutiveAlgorithm:
         return X
 
     def iteration(self):
-        newPopulation = [Chromosome(None,None) for i in range(self.__populationSize)]
+        newPopulation = [Chromosome(None, self.__data) for i in range(self.__populationSize)]
         for i in range(self.__populationSize):
             newPopulation[i] = self.mutation(self.crossOver(self.select(),self.select()))
         self.__curentPopulation = newPopulation
@@ -60,16 +60,18 @@ class EvolutiveAlgorithm:
                 fit = fit + c.getFitness()
         return self.getBest().getCoefficients()
 
+
+
+
 class Chromosome:
-    # def constrChromosome(self, coefficients, data):
-    #    self.__coeficients = coefficients
-    #    self.computeFitness(data)
 
     def __init__(self, coefficients, data):
-        if data == None and coefficients == None:
+        #self.__coeficients = coefficients
+        if  coefficients == None:
             self.__coeficients = [0 for x in range(385)]
             for i in range(385):
                 self.__coeficients[i] = round(random.uniform(-5,5), 2)
+            self.computeFitness(data)
         else:
             self.__coeficients = coefficients
             self.computeFitness(data)
@@ -89,10 +91,6 @@ class Chromosome:
 
             v = curent.getRelativeLocation()
             self.__fitness = (curentValue-v)**2
-
-    #def constrChromosome(self, coefficients, data):
-    #    self.__coeficients = coefficients
-    #    self.computeFitness(data)
 
     def getCoefficints(self):
         return self.__coeficients

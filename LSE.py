@@ -1,4 +1,4 @@
-
+from ial3p3.inverse import Inverse
 
 class LSE:
     def __init__(self, tomographList):
@@ -23,9 +23,8 @@ class LSE:
 
 
     def compute(self):
-
-        return self.__x
-
+        a = Inverse.invert(self.__x)
+        return a
 '''
 public Matrix[] compute(){
 

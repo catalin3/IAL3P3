@@ -2,6 +2,7 @@ import csv
 from ial3p3.tomograph import Tomograph
 from ial3p3.LSE import LSE
 from ial3p3.evolutiveAlgorithm import EvolutiveAlgorithm, Chromosome
+from ial3p3.descentGradient import DescentGradient
 
 
 def read_from_csv(path):
@@ -56,3 +57,29 @@ def evolutiveAlgorithm(path):
         for contor in range(len(airInclusions)):
             currentValue = currentValue + coefficients[contor+241] * airInclusions[contor]
         current.setAI_relativeLocation(currentValue)
+
+def descentGradient(path):
+    tomographList = read_from_csv(path)
+    descentGradient = DescentGradient(3000,tomographList, 0.0000005)
+
+    coefficients = descentGradient.getCoefficients()
+
+    for i in range(len(tomographList)):
+        current = tomographList[i]
+        currentValue = 0
+        currentValue = coefficients[0]
+
+        boneStructures = current.getBoneStructures()
+        airInclusions = current.getAirInclusions()
+
+        for contor in range(len(boneStructures)):
+            currentValue = currentValue + coefficients[contor + 1] * boneStructures[contor]
+
+        for contor in range(len(airInclusions)):
+            currentValue = currentValue + coefficients[contor + 241] * airInclusions[contor]
+        current.setAI_relativeLocation(currentValue)
+        currentValue = (currentValue*100.0)/100.0
+        current.setAI_relativeLocation(currentValue)
+
+    for t in tomographList:
+        print(t.getId()," ",t.getAI_relativeLocation())
