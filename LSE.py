@@ -19,6 +19,7 @@ class LSE:
 
             for contor in range(len(airInclusions)):
                 self.__x[i][contor+241] = airInclusions[contor]
+
                 self.__y[i] = tomographList[i].getRelativeLocations()
 
 
