@@ -1,8 +1,8 @@
 import csv
-from ial3p3.tomograph import Tomograph
-from ial3p3.LSE import LSE
-from ial3p3.evolutiveAlgorithm import EvolutiveAlgorithm, Chromosome
-from ial3p3.descentGradient import DescentGradient
+from tomograph import Tomograph
+from LSE import LSE
+from evolutiveAlgorithm import EvolutiveAlgorithm, Chromosome
+from descentGradient import DescentGradient
 
 
 def read_from_csv(path):
@@ -42,31 +42,41 @@ def leastSquare(path):
 
 
 def evolutiveAlgorithm(path):
+    print("evolutiveAlgorithm")
     tomographList = read_from_csv(path)
-    evolutiveAlgorithm = EvolutiveAlgorithm(100,10,tomographList)
-
+    print("read_from_csv")
+    evolutiveAlgorithm = EvolutiveAlgorithm(10, 10, tomographList)
+    print("evolutiveAlgorithm = EvolutiveAlgorithm")
     coefficients = evolutiveAlgorithm.solve()
+    print("solve")
     for i in range(len(tomographList)):
+        print("aici for1")
         current = tomographList[i]
         currentValue = coefficients[0]
         bonesStructures = current.getBoneStructures()
         airInclusions = current.getAirInclusions()
         for contor in range(len(bonesStructures)):
             currentValue = currentValue + coefficients[contor+1] * bonesStructures[contor]
+            print("aici forBones")
 
         for contor in range(len(airInclusions)):
             currentValue = currentValue + coefficients[contor+241] * airInclusions[contor]
+            print("aici forAir")
         current.setAI_relativeLocation(currentValue)
 
+    for t in tomographList:
+        print(t.getId(), " ", t.getAI_relativeLocation())
+
 def descentGradient(path):
+    print("descentGradient")
     tomographList = read_from_csv(path)
-    descentGradient = DescentGradient(3000,tomographList, 0.0000005)
-
+    print("read_data")
+    descentGradient = DescentGradient(3000, tomographList, 0.0000005)
+    print("descentGradient = DescentGradient")
     coefficients = descentGradient.getCoefficients()
-
+    print("coeficients")
     for i in range(len(tomographList)):
         current = tomographList[i]
-        currentValue = 0
         currentValue = coefficients[0]
 
         boneStructures = current.getBoneStructures()
@@ -74,12 +84,12 @@ def descentGradient(path):
 
         for contor in range(len(boneStructures)):
             currentValue = currentValue + coefficients[contor + 1] * boneStructures[contor]
-
         for contor in range(len(airInclusions)):
             currentValue = currentValue + coefficients[contor + 241] * airInclusions[contor]
+
         current.setAI_relativeLocation(currentValue)
-        currentValue = (currentValue*100.0)/100.0
-        current.setAI_relativeLocation(currentValue)
+        currentValue = round(currentValue*100.0)/100.0
+        #current.setAI_relativeLocation(currentValue)
 
     for t in tomographList:
-        print(t.getId()," ",t.getAI_relativeLocation())
+        print(t.getId(), " ", t.getAI_relativeLocation())

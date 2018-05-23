@@ -1,4 +1,4 @@
-
+import random
 
 def chance50(a,b):
     test = random.random()  # random float 0.0 <= x < 1.0

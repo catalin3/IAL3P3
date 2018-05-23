@@ -3,14 +3,14 @@
 class DescentGradient:
 
     def __init__(self, numberOfIterations, tomographList, learningRate):
-        self.__numberOrIterations = numberOfIterations
+        self.__numberOfIterations = numberOfIterations
         self.__tomographList = tomographList
         self.__learningRate = learningRate
         self.__coefficients = [0 for i in range(385)]
-        self.__error = None
+        self.__error = 0
 
     def compute(self):
-        for i in range(self.__numberOrIterations):
+        for i in range(self.__numberOfIterations):
             gradients = [0 for x in range(385)]
             for tomograph in self.__tomographList:
                 error = 0

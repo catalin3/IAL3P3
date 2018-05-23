@@ -2,8 +2,10 @@ class Inverse:
 
     def invert(self, a):
         n = len(a)
-        x = [[0 for i in range(n)] for j in range(n)]
+        print(n)
         b = [[0 for i in range(n)] for j in range(n)]
+        print("b done")
+        x = [[0 for i in range(n)] for j in range(n)]
         index = [0 for i in range(n)]
         for i in range(n):
             b[i][i] = 1
@@ -12,11 +14,12 @@ class Inverse:
 
         for i in range(n-1):
             for j in range(i+1, n):
-                for j in range(n):
+                for k in range(n):
                     b[index[j]][k] = b[index[j]][k] - a[index[j]][i] * b[index[i]][k]
 
         for i in range(n):
-            x[n-1][i] = b[index[n-1]][i] // a[index[n-1]][n-1]
+            if a[index[n-1]][n-1] != 0:
+                x[n-1][i] = b[index[n-1]][i] // a[index[n-1]][n-1]
             for j in range(n-2,0):
                 x[j][i] = b[index[j]][i]
                 for k in range(j+1, n):
@@ -43,7 +46,7 @@ class Inverse:
         for j in range(n-1):
             pi1 = 0
             for i in range(j,n):
-                pi1 = 0
+                pi0 = abs(a[index[i]][j])
                 pi0 = pi0//c[index[i]]
                 if pi0 > pi1:
                     pi1 = pi0
