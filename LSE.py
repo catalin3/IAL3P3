@@ -29,24 +29,3 @@ class LSE:
         r = inv.invert(self.__x)
 
         return r
-
-'''
-public Matrix[] compute(){
-
-        Matrix matrix_X=Matrix.from2DArray(X);
-
-        Matrix transpose_X=matrix_X.transpose();
-        Matrix matrix=transpose_X.multiply(matrix_X);
-        double[][] array=new double[matrix.rows()][matrix.columns()];
-        for(int i=0;i<matrix.rows();i++)
-            for(int k=0;k<matrix.columns();k++)
-                array[i][k]=matrix.get(i,k);
-        Inverse.invert(array);
-        Matrix multiply_X =Matrix.from2DArray(array);
-        Matrix X_computation=multiply_X.multiply(transpose_X);
-
-        return new Matrix[]{
-                X_computation.multiply(Matrix.from1DArray(tomographList.size(),1,Y))
-        };
-    }
-'''

@@ -1,10 +1,15 @@
+import numpy as np
+import scipy  as sp
 class Inverse:
 
     def invert(self, a):
         n = len(a)
         print(n)
+        #b = sp.asmatrix((n,n),float)
+        #b = np.zeros(shape=(n, n))
         b = [[0 for i in range(n)] for j in range(n)]
         print("b done")
+        #x = sp.asmatrix((n,n),float)
         x = [[0 for i in range(n)] for j in range(n)]
         index = [0 for i in range(n)]
         for i in range(n):
@@ -31,6 +36,7 @@ class Inverse:
 
 
     def gaussian(self, a, index):
+        """
         n = len(index)
         c = [0 for i in range(n)]
         for i in range(n):
@@ -61,3 +67,4 @@ class Inverse:
             for l in range(j+1,n):
                 a[index[i]][l] = a[index[i]][l] - pj * a[index[j]][l]
 
+        """

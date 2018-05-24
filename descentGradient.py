@@ -27,7 +27,7 @@ class DescentGradient:
                 for contor in range(len(bonesStrucrures)):
                     gradients[contor] = gradients[contor] + self.__learningRate * bonesStrucrures[contor]
                 for contor in range(len(airInclusions)):
-                    gradients[contor] = gradients[contor] + self.__learningRate *  airInclusions[contor]
+                    gradients[contor] = gradients[contor] + self.__learningRate * airInclusions[contor]
             for aux in range(385):
                 self.__coefficients[aux] = self.__coefficients - gradients[aux]/(1.0 * len(self.__tomographList))
 

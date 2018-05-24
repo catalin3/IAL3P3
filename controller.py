@@ -26,15 +26,16 @@ def leastSquare(path):
     for i in range(len(tomographList)):
         curent = tomographList[i]
         curentMatrix = result
-        curentValue = 0
 
         curentValue = curentMatrix[0][0]
         bonesStructures = curent.getBoneStructures()
         airInclusions = curent.getAirInclusions()
         for contor in range(len(bonesStructures)):
             curentValue = curentValue + curentMatrix[contor+1][0] * bonesStructures[contor]
+        print(len(bonesStructures))
+        print(len(airInclusions))
         for contor in range(len(airInclusions)):
-            curentValue = curentValue + curentMatrix[contor+241][0] * airInclusions[contor]
+            curentValue = curentValue + airInclusions[contor]
         curent.setAI_relativeLocation(curentValue)
 
     for t in tomographList:
@@ -50,18 +51,18 @@ def evolutiveAlgorithm(path):
     coefficients = evolutiveAlgorithm.solve()
     print("solve")
     for i in range(len(tomographList)):
-        print("aici for1")
+        #print("aici for1")
         current = tomographList[i]
         currentValue = coefficients[0]
         bonesStructures = current.getBoneStructures()
         airInclusions = current.getAirInclusions()
         for contor in range(len(bonesStructures)):
             currentValue = currentValue + coefficients[contor+1] * bonesStructures[contor]
-            print("aici forBones")
+            #print("aici forBones")
 
         for contor in range(len(airInclusions)):
             currentValue = currentValue + coefficients[contor+241] * airInclusions[contor]
-            print("aici forAir")
+            #print("aici forAir")
         current.setAI_relativeLocation(currentValue)
 
     for t in tomographList:
@@ -85,11 +86,11 @@ def descentGradient(path):
         for contor in range(len(boneStructures)):
             currentValue = currentValue + coefficients[contor + 1] * boneStructures[contor]
         for contor in range(len(airInclusions)):
-            currentValue = currentValue + coefficients[contor + 241] * airInclusions[contor]
+            currentValue = currentValue + airInclusions[contor]
 
         current.setAI_relativeLocation(currentValue)
         currentValue = round(currentValue*100.0)/100.0
-        #current.setAI_relativeLocation(currentValue)
+        current.setAI_relativeLocation(currentValue)
 
     for t in tomographList:
         print(t.getId(), " ", t.getAI_relativeLocation())
